@@ -1,10 +1,11 @@
 // ==UserScript==
 // @name         Neopets Quick Stock Price Tooltip (ItemDB)
 // @namespace    https://itemdb.com.br
-// @version      1.1.0
+// @version      1.2.0
 // @description  Shows the market price for items on the Quick Stock page using ItemDB
 // @author       fatalflaw37
 // @match        *://www.neopets.com/quickstock.phtml*
+// @match        *://www.neopets.com/inventory.phtml*
 // @grant        GM_xmlhttpRequest
 // @connect      itemdb.com.br
 // @require      https://code.jquery.com/jquery-3.6.0.min.js
