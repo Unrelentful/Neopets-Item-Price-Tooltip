@@ -5,6 +5,6 @@ This should keep it from returning a price based off just a single value.
 
 >It also will display an asterisk (*) if there are less than 10 prices in the Trade History.
 
-This is a Tampermonkey Plugin script.
+This is a Tampermonkey Plugin script. Only for Chrome.
 
 >Quick How-To: Download Tampermonkey, add/create new script, copy/paste my code. Click Save, Navigate to the Quick Stock Page, reload it, highlight item text.
