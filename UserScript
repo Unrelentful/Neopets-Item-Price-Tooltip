@@ -2,7 +2,7 @@
 // @name         Neopets Quick Stock Price Tooltip (ItemDB)
 // @namespace    https://itemdb.com.br
 // @version      1.2.0
-// @description  Shows the market price for items on the Quick Stock page using ItemDB
+// @description  Shows the market price for items on the Quick Stock and Inventory pages using ItemDB
 // @author       fatalflaw37
 // @match        *://www.neopets.com/quickstock.phtml*
 // @match        *://www.neopets.com/inventory.phtml*
