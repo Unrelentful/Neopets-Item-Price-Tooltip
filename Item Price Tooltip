@@ -8,20 +8,21 @@
 // @match        *://www.neopets.com/inventory.phtml*
 // @match        *://www.neopets.com/market.phtml*
 // @grant        GM_xmlhttpRequest
+// @license      MIT
 // @connect      itemdb.com.br
 // @require      https://code.jquery.com/jquery-3.6.0.min.js
 // ==/UserScript==
-
+ 
 (function () {
     'use strict';
-
+ 
     const intl = new Intl.NumberFormat();
-
+ 
     // Function to fetch item price and calculate median
     function fetchItemPrice(itemName, callback) {
         const itemSlug = itemName.toLowerCase().replace(/\s+/g, '-');
         const itemPageUrl = `https://itemdb.com.br/item/${itemSlug}`;
-
+ 
         GM_xmlhttpRequest({
             method: 'GET',
             url: itemPageUrl,
@@ -29,28 +30,28 @@
                 if (res.status !== 200) {
                     return callback('Error Fetching Price');
                 }
-
+ 
                 const parser = new DOMParser();
                 const doc = parser.parseFromString(res.responseText, 'text/html');
-
+ 
                 const priceCells = Array.from(doc.querySelectorAll('table tbody tr td:first-child'))
                     .map(td => {
                         const text = td.textContent.trim().replace(/,/g, '').replace(/[^\d]/g, '');
                         return parseInt(text, 10);
                     })
                     .filter(n => !isNaN(n));
-
+ 
                 const recentPrices = priceCells.slice(0, 10);
                 if (recentPrices.length === 0) {
                     return callback('No Price Data');
                 }
-
+ 
                 recentPrices.sort((a, b) => a - b);
                 const mid = Math.floor(recentPrices.length / 2);
                 const median = recentPrices.length % 2 === 0
                     ? Math.round((recentPrices[mid - 1] + recentPrices[mid]) / 2)
                     : recentPrices[mid];
-
+ 
                 const priceText = `${intl.format(median)} NP${recentPrices.length < 10 ? '*' : ''}`;
                 callback(priceText);
             },
@@ -59,7 +60,7 @@
             }
         });
     }
-
+ 
     // Function to show the tooltip
     function showTooltip(e, priceText) {
         const tooltip = $('<div class="price-tooltip"></div>')
@@ -76,12 +77,12 @@
                 zIndex: 9999
             });
         $('body').append(tooltip);
-
+ 
         $(document).one('click', function () {
             tooltip.remove();
         });
     }
-
+ 
         // Highlight text and trigger price fetch
     let timeout;
     $(document).on('mouseup', function (e) {
