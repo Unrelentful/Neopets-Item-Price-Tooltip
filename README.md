@@ -14,7 +14,7 @@ Navigate to the Iventory/Quick Stock/or Market page and highlight any item text 
 
 **This won't replace looking up the prices of items before you stock them if you like to stay competitive in pricing. It will just help speed up finding the junk and low-value items to dump quickly without having to look up each item.
 
-##########
+>~~~~~~~~~~~~~~~~~~~~~
 
 This is a Tampermonkey Plugin script I designed for Chrome; may work on FireFox.
 
