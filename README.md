@@ -1,4 +1,4 @@
-!!! Personally, I ALWAYS use [VirusTotal.com](https://www.virustotal.com/gui/home/url) to scan links and files before clicking/downloading.
+Personally, I ALWAYS use [VirusTotal.com](https://www.virustotal.com/gui/home/url) to scan links and files before clicking/downloading.
 
 
 ~ Neopets Item Price Tooltip ~
