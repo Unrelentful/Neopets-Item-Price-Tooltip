@@ -6,6 +6,7 @@
 // @author       fatalflaw37
 // @match        *://www.neopets.com/quickstock.phtml*
 // @match        *://www.neopets.com/inventory.phtml*
+// @match        *://www.neopets.com/market.phtml*
 // @grant        GM_xmlhttpRequest
 // @connect      itemdb.com.br
 // @require      https://code.jquery.com/jquery-3.6.0.min.js
