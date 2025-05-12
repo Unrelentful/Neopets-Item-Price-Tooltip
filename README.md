@@ -7,7 +7,7 @@ This should keep it from returning a price based off just a single value.
 
 >It also will display an asterisk (*) if there are less than 10 prices in the Trade History.
 
-This is a Tampermonkey Plugin script. Only for Chrome.
+This is a Tampermonkey Plugin script I designed for Chrome; may work on FireFox.
 
 Install 'TamperMonkey' Extension on Chrome from either the App Store or the Extension's Website; I used App Store.
 
