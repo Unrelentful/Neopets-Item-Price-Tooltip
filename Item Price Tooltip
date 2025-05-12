@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         Neopets Item Price Tooltip (ItemDB)
+// @name         Neopets Item Price Tooltip (ItemDB + Jellyneo Link)
 // @namespace    https://itemdb.com.br
-// @version      1.3.1
-// @description  Shows the market price for items on the Inventory, Quick Stock, and your Shop pages using ItemDB
+// @version      1.4.0
+// @description  Shows the market price for items on the Inventory, Quick Stock, and your Shop pages using ItemDB, with a link to Jellyneo search.
 // @author       FatalFlaw
 // @match        *://www.neopets.com/quickstock.phtml*
 // @match        *://www.neopets.com/inventory.phtml*
@@ -12,17 +12,17 @@
 // @connect      itemdb.com.br
 // @require      https://code.jquery.com/jquery-3.6.0.min.js
 // ==/UserScript==
- 
+
 (function () {
     'use strict';
- 
+
     const intl = new Intl.NumberFormat();
- 
+
     // Function to fetch item price and calculate median
     function fetchItemPrice(itemName, callback) {
         const itemSlug = itemName.toLowerCase().replace(/\s+/g, '-');
         const itemPageUrl = `https://itemdb.com.br/item/${itemSlug}`;
- 
+
         GM_xmlhttpRequest({
             method: 'GET',
             url: itemPageUrl,
@@ -30,28 +30,28 @@
                 if (res.status !== 200) {
                     return callback('Error Fetching Price');
                 }
- 
+
                 const parser = new DOMParser();
                 const doc = parser.parseFromString(res.responseText, 'text/html');
- 
+
                 const priceCells = Array.from(doc.querySelectorAll('table tbody tr td:first-child'))
                     .map(td => {
                         const text = td.textContent.trim().replace(/,/g, '').replace(/[^\d]/g, '');
                         return parseInt(text, 10);
                     })
                     .filter(n => !isNaN(n));
- 
+
                 const recentPrices = priceCells.slice(0, 10);
                 if (recentPrices.length === 0) {
                     return callback('No Price Data');
                 }
- 
+
                 recentPrices.sort((a, b) => a - b);
                 const mid = Math.floor(recentPrices.length / 2);
                 const median = recentPrices.length % 2 === 0
                     ? Math.round((recentPrices[mid - 1] + recentPrices[mid]) / 2)
                     : recentPrices[mid];
- 
+
                 const priceText = `${intl.format(median)} NP${recentPrices.length < 10 ? '*' : ''}`;
                 callback(priceText);
             },
@@ -60,30 +60,34 @@
             }
         });
     }
- 
-    // Function to show the tooltip
-    function showTooltip(e, priceText) {
+
+    // Function to show the tooltip (with clickable link to Jellyneo)
+    function showTooltip(e, priceText, itemName) {
+        const jellyNeoUrl = `https://items.jellyneo.net/search/?name=${encodeURIComponent(itemName)}`;
         const tooltip = $('<div class="price-tooltip"></div>')
-            .text(priceText)
+            .html(`<a href="${jellyNeoUrl}" target="_blank" style="color:white; text-decoration:underline;">
+                      ${priceText} 🔍
+                   </a>`)
             .css({
                 position: 'absolute',
                 top: e.pageY + 10 + 'px',
                 left: e.pageX + 10 + 'px',
                 padding: '5px',
                 backgroundColor: 'rgba(0, 0, 0, 0.75)',
-                color: 'white',
                 borderRadius: '5px',
                 fontSize: '12px',
-                zIndex: 9999
+                zIndex: 9999,
+                cursor: 'pointer'
             });
+
         $('body').append(tooltip);
- 
+
         $(document).one('click', function () {
             tooltip.remove();
         });
     }
- 
-        // Highlight text and trigger price fetch
+
+    // Highlight text and trigger price fetch
     let timeout;
     $(document).on('mouseup', function (e) {
         const selectedText = window.getSelection().toString().trim();
@@ -91,9 +95,9 @@
             clearTimeout(timeout);
             timeout = setTimeout(function () {
                 fetchItemPrice(selectedText, function (priceText) {
-                    showTooltip(e, priceText);
+                    showTooltip(e, priceText, selectedText);
                 });
-            }, 300);  // Delay lookup by 300ms
+            }, 300); // Delay lookup by 300ms
         }
     });
 })();
