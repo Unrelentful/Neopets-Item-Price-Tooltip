@@ -8,7 +8,9 @@ Shows a calculated market price for items on the Inventory, Quick Stock, and you
 
 # ~ How To Use ~
 
-Navigate to the Iventory/Quick Stock/or Market page and highlight any item text to instantly search for prices. It will provide a tooltip with the info and a link to the item page on JellyNeo.
+1) Navigate to the Iventory/Quick Stock/or Market page
+2) Highlight any item text to instantly search for prices
+It will provide a tooltip with the info and a link to the item page on JellyNeo.
 
 >It takes the 20 most recent prices from the ItemDB Trade History and returns the median value of those 20 prices!
 
