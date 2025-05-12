@@ -1,7 +1,7 @@
 Personally, I ALWAYS use [VirusTotal.com](https://www.virustotal.com/gui/home/url) to scan links and files before clicking/downloading.
 
 
-~ Neopets Item Price Tooltip ~
+###~ Neopets Item Price Tooltip ~###
 
 Shows a calculated market price for items on the Inventory, Quick Stock, and your Shop pages using ItemDB, with a Jellyneo link and price warning indicators.
 
