@@ -12,3 +12,5 @@ This is a Tampermonkey Plugin script I designed for Chrome; may work on FireFox.
 Install 'TamperMonkey' Extension on Chrome from either the App Store or the Extension's Website; I used App Store.
 
 >Quick How-To: Download Tampermonkey, add/create new script, copy/paste my code. Click Save, Navigate to one of the pages, reload it, highlight item text.
+
+Can also find it on GreasyFork here: https://greasyfork.org/en/scripts/535724-neopets-item-price-tooltip-itemdb-jellyneo-link
